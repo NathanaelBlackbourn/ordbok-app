@@ -1,4 +1,4 @@
-import { render, screen, within } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { userEvent } from '@testing-library/user-event';
 import App from 'src/App';
 
@@ -8,7 +8,6 @@ describe.skip('vg krav', () => {
 
     it('should be possible to save favourite words to session storage', () => {
         user.type(screen.getByRole('textbox'), 'test');
-        user.click(within(screen.getByTestId('results')).getByText('test'));
         user.click(screen.getByRole('button', { name: 'save' }));
 
         const favsJSON = sessionStorage.getItem('favouriteWords');

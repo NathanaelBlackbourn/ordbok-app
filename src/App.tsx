@@ -1,18 +1,22 @@
 import styles from './App.module.scss';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import fetchWords from './utils/fetchWords';
 
 import Heading from './components/Heading/Heading';
-import Results from './components/Results/Results';
+import Result from './components/Result/Result';
 import SearchBar from './components/SearchBar/SearchBar';
 
 function App() {
-    const [results, setResults] = useState([]);
+    const [result, setResult] = useState({});
 
     const handleSearch = (term: string) => {
-        fetchWords(term).then((data) => setResults(data));
+        fetchWords(term).then((data) => setResult(data[0]));
     };
+
+    useEffect(() => {
+        console.log(result);
+    }, [result]);
 
     return (
         <>
@@ -21,7 +25,7 @@ function App() {
                 <SearchBar handleSearch={handleSearch} />
             </div>
             <div className={styles.right}>
-                {!!results.length && <Results results={results} />}
+                {result && <Result result={result} />}
             </div>
         </>
     );

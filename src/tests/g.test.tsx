@@ -2,8 +2,6 @@ import '@testing-library/jest-dom';
 import { render, screen, within } from '@testing-library/react';
 import { userEvent } from '@testing-library/user-event';
 import App from 'src/App';
-import { WordData } from 'src/types/response';
-import fetchWords from 'src/utils/fetchWords';
 
 describe.only('g krav', () => {
     const user = userEvent.setup();
@@ -12,7 +10,7 @@ describe.only('g krav', () => {
         user.type(screen.getByRole('textbox'), 'test');
 
         expect(
-            within(await screen.findByTestId('results')).getByText('test')
+            within(await screen.findByTestId('result')).getByText('test')
         ).toBeInTheDocument();
     });
 
@@ -26,20 +24,12 @@ describe.only('g krav', () => {
     });
 
     it.skip('should be possible to play sound files when available', async () => {
-        const results: WordData[] = await fetchWords();
-        const withSound = results.find((result) => !!result.phonetics.length); // TODO: Define result type
-        if (!withSound) throw new Error('No word with sound file found.');
-
-        user.type(screen.getByRole('textbox'), withSound.word);
-        user.click(
-            within(screen.getByTestId('results')).getByText(withSound.word)
-        );
+        user.type(screen.getByRole('textbox'), 'test');
 
         expect(
             screen.getByRole('button', { name: 'Play audio' })
         ).toBeInTheDocument();
 
         user.click(screen.getByRole('button', { name: 'Play audio' }));
-        screen.debug();
     });
 });
