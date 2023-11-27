@@ -8,7 +8,7 @@ import Result from './components/Result/Result';
 import SearchBar from './components/SearchBar/SearchBar';
 
 function App() {
-    const [result, setResult] = useState({});
+    const [result, setResult] = useState(null);
 
     const handleSearch = (term: string) => {
         fetchWords(term).then((data) => setResult(data[0]));

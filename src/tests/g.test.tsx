@@ -2,11 +2,13 @@ import '@testing-library/jest-dom';
 import { render, screen, within } from '@testing-library/react';
 import { userEvent } from '@testing-library/user-event';
 import App from 'src/App';
+import { Phonetic } from 'src/types/response';
+import fetchWords from 'src/utils/fetchWords';
 
 describe.only('g krav', () => {
     const user = userEvent.setup();
     render(<App />);
-    it.only('should display filtered results when searching a word', async () => {
+    it.skip('should display filtered results when searching a word', async () => {
         user.type(screen.getByRole('textbox'), 'test');
 
         expect(
@@ -23,13 +25,22 @@ describe.only('g krav', () => {
         ).toBeInTheDocument();
     });
 
-    it.skip('should be possible to play sound files when available', async () => {
+    it.only('should be possible to play sound files when available', async () => {
+        user.clear(screen.getByRole('textbox'));
+
+        const hasAudio = await fetchWords('test').then(
+            (data) =>
+                data[0].phonetics.find((phonetic: Phonetic) => phonetic.audio)
+                    .audio
+        );
+
+        if (!hasAudio)
+            throw new Error('No audio was found for the word "test".'); // TODO: Improve quality of this test
+
         user.type(screen.getByRole('textbox'), 'test');
 
-        expect(
-            screen.getByRole('button', { name: 'Play audio' })
-        ).toBeInTheDocument();
+        expect(await screen.findByTestId('audio-button')).toBeInTheDocument();
 
-        user.click(screen.getByRole('button', { name: 'Play audio' }));
+        user.click(screen.getByTestId('audio-button'));
     });
 });

@@ -3,9 +3,26 @@
     line-height: 6rem;
 }
 
+.pronunciation {
+    display: flex;
+    gap: 0.5rem;
+}
+
 .phonetic {
     font-size: 1.5rem;
     line-height: 4rem;
+    margin: 0 0 0 0;
+}
+
+.audioContainer {
+    display: flex;
+    align-items: center;
+}
+
+.audioButton {
+    background: none;
+    border: none;
+    cursor: pointer;
 }
 
 .meaning {
