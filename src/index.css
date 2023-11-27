@@ -1,9 +1,25 @@
 :root {
-  --primary-color: black;
-  --background-color: white;
-  color: var(--primary-color);
+    --primary-color: black;
+    --background-color: white;
+}
+
+* {
+    font-weight: 300;
+    font-size: 20px;
+    font-family: Helvetica, sans-serif;
+    color: var(--primary-color);
 }
 
 body {
-  background-color: var(--background-color);
+    background-color: var(--background-color);
+
+    margin: 0 0 0 0;
+}
+
+#root {
+    display: flex;
+    justify-content: space-between;
+    min-height: 100vh;
+
+    padding: 0 0.5rem;
 }

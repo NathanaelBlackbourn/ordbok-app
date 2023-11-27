@@ -1,9 +1,10 @@
-import { http, HttpResponse } from 'msw'
+import { http, HttpResponse } from 'msw';
+import data from './data';
 
 const handlers = [
     http.get('https://api.dictionaryapi.dev/api/v2/entries/en/*', () =>
-        HttpResponse.json({ message: 'Hello, World!' })
+        HttpResponse.json(data)
     ),
-]
+];
 
-export default handlers
+export default handlers;

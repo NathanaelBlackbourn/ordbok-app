@@ -1,0 +1,16 @@
+@mixin container {
+    width: 100%;
+
+    @media (min-width: 768px) {
+        width: 47%;
+        height: 100%;
+    }
+}
+
+.left {
+    @include container;
+}
+
+.right {
+    @include container;
+}

@@ -24,15 +24,11 @@ export interface Meaning {
     antonyms: string[];
 }
 
-export interface SourceUrl {
-    sourceUrls: string[];
-}
-
 export interface WordData {
     word: string;
     phonetic: string;
     phonetics: Phonetic[];
     meanings: Meaning[];
     license: License;
-    sourceUrls: SourceUrl;
+    sourceUrls: string[];
 }

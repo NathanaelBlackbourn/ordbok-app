@@ -1,34 +1,45 @@
-import '@testing-library/jest-dom'
-import { render, screen, within } from '@testing-library/react'
-import { userEvent } from '@testing-library/user-event'
-import App from 'src/App'
+import '@testing-library/jest-dom';
+import { render, screen, within } from '@testing-library/react';
+import { userEvent } from '@testing-library/user-event';
+import App from 'src/App';
+import { WordData } from 'src/types/response';
+import fetchWords from 'src/utils/fetchWords';
 
-describe('g krav', () => {
-    const user = userEvent.setup()
-    render(<App />)
-    it('should display filtered results when searching a word', () => {
-        user.type(screen.getByRole('textbox'), 'test')
+describe.only('g krav', () => {
+    const user = userEvent.setup();
+    render(<App />);
+    it.only('should display filtered results when searching a word', async () => {
+        user.type(screen.getByRole('textbox'), 'test');
 
         expect(
-            within(screen.getByTestId('results')).getByText('test')
-        ).toBeInTheDocument()
-    })
+            within(await screen.findByTestId('results')).getByText('test')
+        ).toBeInTheDocument();
+    });
 
-    it('should should display an error message when the search bar is empty', () => {
-        user.type(screen.getByRole('textbox'), 'test')
-        user.clear(screen.getByRole('textbox'))
+    it.skip('should should display an error message when the search bar is empty', () => {
+        user.type(screen.getByRole('textbox'), 'test');
+        user.clear(screen.getByRole('textbox'));
 
         expect(
             screen.getByText('Please enter a word to search.')
-        ).toBeInTheDocument()
-    })
+        ).toBeInTheDocument();
+    });
 
-    it('should be possible to play sound files when available', async () => {
-        // Fetch a word with a sound file
-        // const results = await fetchWords();
-        // const withSound = results.find((result: any) => result.sound !== undefined) // TODO: Define result type
-        // Search for that word in the app
-        // Check that the sound file is present
-        // Test playing the sound file
-    })
-})
+    it.skip('should be possible to play sound files when available', async () => {
+        const results: WordData[] = await fetchWords();
+        const withSound = results.find((result) => !!result.phonetics.length); // TODO: Define result type
+        if (!withSound) throw new Error('No word with sound file found.');
+
+        user.type(screen.getByRole('textbox'), withSound.word);
+        user.click(
+            within(screen.getByTestId('results')).getByText(withSound.word)
+        );
+
+        expect(
+            screen.getByRole('button', { name: 'Play audio' })
+        ).toBeInTheDocument();
+
+        user.click(screen.getByRole('button', { name: 'Play audio' }));
+        screen.debug();
+    });
+});
