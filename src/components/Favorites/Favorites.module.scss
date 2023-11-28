@@ -1,0 +1,38 @@
+.container {
+    @media (min-width: 768px) {
+        margin-top: 6rem;
+    }
+}
+
+.ul {
+    border-top: 1px solid var(--primary-color);
+}
+
+.li {
+    width: 100%;
+    border-bottom: 1px solid var(--primary-color);
+}
+
+.button {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    width: 100%;
+    padding: 1rem 0;
+
+    cursor: pointer;
+
+    &:hover {
+        .icon {
+            left: 0.5rem;
+        }
+    }
+}
+
+.icon {
+    position: relative;
+
+    transition: all 0.2s ease-in;
+    left: 0;
+}

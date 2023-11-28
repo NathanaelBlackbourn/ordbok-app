@@ -1,4 +1,4 @@
-import styles from './FavoriteButton.module.scss';
+import styles from './AddFavorite.module.scss';
 
 import { Star } from '@phosphor-icons/react';
 
@@ -8,7 +8,7 @@ interface Props {
     word: string;
 }
 
-const FavoriteButton = ({ word }: Props) => {
+const AddFavorite = ({ word }: Props) => {
     const [inFavorites, setInFavorites] = useState(false);
 
     const session = useRef(
@@ -38,7 +38,7 @@ const FavoriteButton = ({ word }: Props) => {
     };
 
     return (
-        <button onClick={handleClick}>
+        <button onClick={handleClick} data-testid="add-favorite">
             <Star
                 size={32}
                 weight={inFavorites ? 'fill' : 'light'}
@@ -48,4 +48,4 @@ const FavoriteButton = ({ word }: Props) => {
     );
 };
 
-export default FavoriteButton;
+export default AddFavorite;

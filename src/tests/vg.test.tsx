@@ -1,37 +1,40 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import { userEvent } from '@testing-library/user-event';
 import App from 'src/App';
 
-describe.skip('vg krav', () => {
+describe.only('vg krav', () => {
     render(<App />);
     const user = userEvent.setup();
 
-    it('should be possible to save favourite words to session storage', () => {
+    it.skip('should be possible to save favorite words to session storage', async () => {
         user.type(screen.getByRole('textbox'), 'test');
-        user.click(screen.getByRole('button', { name: 'save' }));
+        user.click(await screen.findByTestId('add-favorite'));
+        user.click(screen.getByTestId('open-favorites'));
 
-        const favsJSON = sessionStorage.getItem('favouriteWords');
-        if (!favsJSON) throw new Error('favsJSON is undefined');
-
-        expect(JSON.parse(favsJSON)?.test).toBeDefined();
+        expect(
+            within(await screen.findByTestId('favorites')).getByText('test')
+        ).toBeInTheDocument();
     });
 
-    it('should be possible to toggle between light and dark mode', () => {
-        let prevMode = document.querySelector('body')?.classList[0];
-        if (!prevMode) throw new Error('No color mode detected');
+    it.only('should be possible to toggle between light and dark mode', async () => {
+        let prevMode = document.querySelector('html')?.className;
+        console.log(prevMode);
 
-        const checkModeChange = () => {
-            user.click(screen.getByRole('button', { name: 'color-mode' }));
+        const checkModeChange = async () => {
+            user.click(await screen.findByTestId('mode-button'));
 
-            const newMode = document.querySelector('body')?.classList[0];
-            if (!newMode) throw new Error('Color mode change failed');
-            prevMode === 'light'
-                ? expect(newMode).toBe('dark')
-                : expect(newMode).toBe('light');
+            const newMode = document.querySelector('html')?.className;
+            console.log('newMode', newMode);
+            console.log('classList', ...document.documentElement.classList);
+
+            expect(newMode).not.toBe('');
+            prevMode === 'dark'
+                ? expect(newMode).toBe('light')
+                : expect(newMode).toBe('dark');
             prevMode = newMode;
         };
 
-        checkModeChange();
-        checkModeChange();
+        expect(await checkModeChange()).not.toThrow();
+        expect(await checkModeChange()).not.toThrow();
     });
 });

@@ -5,10 +5,10 @@ import App from 'src/App';
 import { iPhonetic } from 'src/types/response';
 import fetchWords from 'src/utils/fetchWords';
 
-describe.only('g krav', () => {
+describe.skip('g krav', () => {
     const user = userEvent.setup();
     render(<App />);
-    it.skip('should display filtered results when searching a word', async () => {
+    it('should display filtered results when searching a word', async () => {
         user.type(screen.getByRole('textbox'), 'test');
 
         expect(
@@ -16,7 +16,7 @@ describe.only('g krav', () => {
         ).toBeInTheDocument();
     });
 
-    it.skip('should should display an error message when the search bar is empty', () => {
+    it('should should display an error message when the search bar is empty', () => {
         user.type(screen.getByRole('textbox'), 'test');
         user.clear(screen.getByRole('textbox'));
 
@@ -25,7 +25,7 @@ describe.only('g krav', () => {
         ).toBeInTheDocument();
     });
 
-    it.only('should be possible to play sound files when available', async () => {
+    it('should be possible to play sound files when available', async () => {
         user.clear(screen.getByRole('textbox'));
 
         const hasAudio = await fetchWords('test').then(
@@ -36,6 +36,9 @@ describe.only('g krav', () => {
 
         if (!hasAudio)
             throw new Error('No audio was found for the word "test".'); // TODO: Improve quality of this test
+
+        // TODO: Somehow test that the sound is being played
+        // Potentially just if the play method is being called
 
         user.type(screen.getByRole('textbox'), 'test');
 

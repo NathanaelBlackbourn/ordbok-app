@@ -1,13 +1,26 @@
+// Root setup
+
 :root {
-    --primary-color: black;
-    --background-color: white;
+    &.light {
+        --primary-color: black;
+        --background-color: white;
+    }
+
+    &.dark {
+        --primary-color: white;
+        --background-color: black;
+    }
 }
 
 * {
     font-weight: 300;
-    font-size: 20px;
+    font-size: 25px;
     font-family: Helvetica, sans-serif;
     color: var(--primary-color);
+
+    transition-property: color, background-color;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in;
 }
 
 body {
@@ -36,4 +49,20 @@ button {
     border: none;
     background: none;
     cursor: pointer;
+}
+
+ul {
+    padding: 0;
+    list-style: none;
+}
+
+// Global styles
+
+h2 {
+    font-size: 2rem;
+    line-height: 6rem;
+}
+
+h3 {
+    margin: 0 0 0 0;
 }

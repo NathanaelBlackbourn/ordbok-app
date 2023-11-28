@@ -1,0 +1,42 @@
+@import 'src/styles/mixins';
+
+.panel {
+    display: flex;
+    gap: 0.5rem;
+
+    position: fixed;
+    bottom: 0.5rem;
+    left: 0.5rem;
+}
+
+.button {
+    overflow: hidden;
+}
+
+@mixin icon {
+    @include icon-border;
+    @include icon-hover;
+
+    cursor: pointer;
+}
+
+.sun {
+    @include icon;
+
+    position: relative;
+
+    transition: bottom 0.2s ease-in-out;
+}
+
+.moon {
+    @include icon;
+
+    position: absolute;
+    left: 0;
+
+    transition: top 0.2s ease-in-out;
+}
+
+.star {
+    @include icon;
+}
