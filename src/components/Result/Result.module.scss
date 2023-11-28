@@ -1,4 +1,9 @@
-.heading {
+.header {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.word {
     font-size: 2rem;
     line-height: 6rem;
 }

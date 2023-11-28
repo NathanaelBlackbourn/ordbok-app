@@ -5,6 +5,7 @@ import { useMemo } from 'react';
 import { iWordData } from 'src/types/response';
 
 import AudioButton from '../AudioButton/AudioButton';
+import FavoriteButton from '../FavoriteButton/FavoriteButton';
 import Meaning from '../Meaning/Meaning';
 
 interface Props {
@@ -27,7 +28,10 @@ const Results = ({ result }: Props) => {
 
     return (
         <div data-testid="result">
-            <h2 className={styles.heading}>{result.word}</h2>
+            <div className={styles.header}>
+                <h2 className={styles.word}>{result.word}</h2>
+                <FavoriteButton word={result.word} />
+            </div>
             <div className={styles.pronunciation}>
                 {phonetic && <h3 className={styles.phonetic}>{phonetic}</h3>}
                 {!!audio && <AudioButton audio={audio} />}

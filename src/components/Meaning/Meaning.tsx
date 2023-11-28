@@ -26,20 +26,34 @@ const Meaning = ({ meaning }: Props) => {
                 />
             </button>
             {open && (
-                <ol>
-                    {meaning.definitions.map((definition, i) => (
-                        <li key={i} className={styles.definition}>
-                            <p className={styles.definition}>
-                                {definition.definition}
-                            </p>
-                            {definition.example && (
-                                <p className={styles.example}>
-                                    {definition.example}
+                <>
+                    <ol>
+                        {meaning.definitions.map((definition, i) => (
+                            <li key={i} className={styles.definition}>
+                                <p className={styles.definition}>
+                                    {definition.definition}
                                 </p>
-                            )}
-                        </li>
-                    ))}
-                </ol>
+                                {definition.example && (
+                                    <p className={styles.example}>
+                                        {definition.example}
+                                    </p>
+                                )}
+                            </li>
+                        ))}
+                    </ol>
+                    {meaning.synonyms.length > 0 && (
+                        <div className={styles.nyms}>
+                            <h4>Synonyms</h4>
+                            <p>{meaning.synonyms.join(', ')}</p>
+                        </div>
+                    )}
+                    {meaning.antonyms.length > 0 && (
+                        <div className={styles.nyms}>
+                            <h4>Antonyms</h4>
+                            <p>{meaning.antonyms.join(', ')}</p>
+                        </div>
+                    )}
+                </>
             )}
         </li>
     );

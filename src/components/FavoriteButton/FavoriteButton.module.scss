@@ -1,0 +1,6 @@
+@import 'src/styles/mixins.scss';
+
+.icon {
+    @include icon-border;
+    @include icon-hover;
+}
