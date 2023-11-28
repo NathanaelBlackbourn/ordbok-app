@@ -14,23 +14,7 @@
     margin: 0 0 0 0;
 }
 
-.audioContainer {
-    display: flex;
-    align-items: center;
-}
-
-.audioButton {
-    background: none;
-    border: none;
-    cursor: pointer;
-}
-
-.meaning {
-    list-style: none;
-    padding: 0;
-    margin-bottom: 5rem;
-}
-
-.definition {
-    font-size: 1rem;
+.meaningList {
+    border-top: 1px solid var(--primary-color);
+    padding: 0 0 0 0;
 }

@@ -1,34 +1,34 @@
-export interface License {
+export interface iLicense {
     name: string;
     url: string;
 }
 
-export interface Phonetic {
+export interface iPhonetic {
     text: string;
     audio: string;
     sourceUrl: string;
-    license: License;
+    license: iLicense;
 }
 
-export interface Definition {
+export interface iDefinition {
     definition: string;
     synonyms: string[];
     antonyms: string[];
     example?: string;
 }
 
-export interface Meaning {
+export interface iMeaning {
     partOfSpeech: string;
-    definitions: Definition[];
+    definitions: iDefinition[];
     synonyms: string[];
     antonyms: string[];
 }
 
-export interface WordData {
+export interface iWordData {
     word: string;
     phonetic: string;
-    phonetics: Phonetic[];
-    meanings: Meaning[];
-    license: License;
+    phonetics: iPhonetic[];
+    meanings: iMeaning[];
+    license: iLicense;
     sourceUrls: string[];
 }

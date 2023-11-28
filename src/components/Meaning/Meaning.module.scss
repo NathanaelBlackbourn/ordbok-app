@@ -1,0 +1,34 @@
+.meaning {
+    list-style: none;
+    padding: 0;
+    border-bottom: 1px solid var(--primary-color);
+}
+
+.dropdown {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+
+    width: 100%;
+    padding: 1rem 0;
+
+    &:hover {
+        .icon {
+            border-color: var(--primary-color);
+        }
+    }
+}
+
+.icon {
+    transition: all 0.2s 0.1s ease-out;
+
+    border: 1px solid transparent;
+    border-radius: 50%;
+
+    padding: 0.4rem;
+}
+
+.definition {
+    font-size: 1rem;
+}

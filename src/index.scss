@@ -19,10 +19,21 @@ body {
 #root {
     display: flex;
     justify-content: space-between;
+    flex-direction: column;
 
     padding: 0 0.5rem;
 
     @media (min-width: 768px) {
+        flex-direction: row;
+
         height: 100vh;
     }
+}
+
+// Global resets
+
+button {
+    border: none;
+    background: none;
+    cursor: pointer;
 }

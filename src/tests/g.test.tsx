@@ -2,7 +2,7 @@ import '@testing-library/jest-dom';
 import { render, screen, within } from '@testing-library/react';
 import { userEvent } from '@testing-library/user-event';
 import App from 'src/App';
-import { Phonetic } from 'src/types/response';
+import { iPhonetic } from 'src/types/response';
 import fetchWords from 'src/utils/fetchWords';
 
 describe.only('g krav', () => {
@@ -30,7 +30,7 @@ describe.only('g krav', () => {
 
         const hasAudio = await fetchWords('test').then(
             (data) =>
-                data[0].phonetics.find((phonetic: Phonetic) => phonetic.audio)
+                data[0].phonetics.find((phonetic: iPhonetic) => phonetic.audio)
                     .audio
         );
 

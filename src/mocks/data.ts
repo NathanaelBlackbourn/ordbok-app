@@ -1,6 +1,6 @@
-import { WordData } from 'src/types/response';
+import { iWordData } from 'src/types/response';
 
-const data: WordData[] = [
+const data: iWordData[] = [
     {
         word: 'test',
         phonetic: '/test/',
