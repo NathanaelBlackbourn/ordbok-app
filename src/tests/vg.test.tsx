@@ -7,15 +7,18 @@ describe('vg krav', () => {
         render(<App />);
         const user = userEvent.setup();
 
+        // Add word 'test'
         user.type(screen.getByRole('textbox'), 'test');
-
         await waitFor(async () =>
-            expect(await screen.findByTestId('add-favorite')).toBeEnabled()
+            expect(
+                await screen.findByTestId('add-favorite')
+            ).toBeInTheDocument()
         );
+
         user.click(await screen.findByTestId('add-favorite'));
 
+        // Check that the favorites tab contains the word 'test'
         user.click(screen.getByTestId('open-favorites'));
-
         expect(
             within(await screen.findByTestId('favorites')).getByText('test')
         ).toBeInTheDocument();
@@ -24,6 +27,8 @@ describe('vg krav', () => {
     it.skip('should be possible to toggle between light and dark mode', async () => {
         render(<App />);
         const user = userEvent.setup();
+
+        // Get the primary and backgound color variables from the root element
         const primaryColor = getComputedStyle(
             document.documentElement
         ).getPropertyValue('--primary-color');
@@ -31,6 +36,7 @@ describe('vg krav', () => {
             document.documentElement
         ).getPropertyValue('--background-color');
 
+        // Check the colors of text and background
         const checkColors = (text: string, background: string) => {
             screen
                 .getAllByRole('heading')
@@ -41,6 +47,7 @@ describe('vg krav', () => {
             });
         };
 
+        // Test button twice
         user.click(screen.getByTestId('mode-button'));
         checkColors(primaryColor, backgroundColor);
         user.click(screen.getByTestId('mode-button'));

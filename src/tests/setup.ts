@@ -19,18 +19,12 @@ interface iStore {
 const sessionStorageMock = (function () {
     let store: iStore = {};
 
-    console.log('Setup sessionStorage');
-
     return {
         getItem(key: string) {
-            console.log('getItem');
-            console.log(store);
             return store[key];
         },
 
         setItem(key: string, value: string) {
-            console.log('setItem');
-            console.log(store);
             store[key] = value;
         },
 
