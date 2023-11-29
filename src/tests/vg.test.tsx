@@ -17,24 +17,26 @@ describe.only('vg krav', () => {
     });
 
     it.only('should be possible to toggle between light and dark mode', async () => {
-        let prevMode = document.querySelector('html')?.className;
-        console.log(prevMode);
+        const primaryColor = getComputedStyle(
+            document.documentElement
+        ).getPropertyValue('--primary-color');
+        const backgroundColor = getComputedStyle(
+            document.documentElement
+        ).getPropertyValue('--background-color');
 
-        const checkModeChange = async () => {
-            user.click(await screen.findByTestId('mode-button'));
+        const checkColors = (text: string, background: string) => {
+            screen
+                .getAllByRole('heading')
+                .forEach((h) => expect(h).toHaveStyle({ color: text }));
 
-            const newMode = document.querySelector('html')?.className;
-            console.log('newMode', newMode);
-            console.log('classList', ...document.documentElement.classList);
-
-            expect(newMode).not.toBe('');
-            prevMode === 'dark'
-                ? expect(newMode).toBe('light')
-                : expect(newMode).toBe('dark');
-            prevMode = newMode;
+            expect(document.querySelector('body')).toHaveStyle({
+                backgroundColor: background,
+            });
         };
 
-        expect(await checkModeChange()).not.toThrow();
-        expect(await checkModeChange()).not.toThrow();
+        user.click(screen.getByTestId('mode-button'));
+        checkColors(primaryColor, backgroundColor);
+        user.click(screen.getByTestId('mode-button'));
+        checkColors(backgroundColor, primaryColor);
     });
 });

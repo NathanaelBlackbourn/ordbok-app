@@ -12,10 +12,11 @@ const ButtonPanel = ({ setShowFavorites }: Props) => {
     const [nightMode, setNightMode] = useState(false);
 
     const changeMode = () => {
-        const classes = ['light', 'dark'];
         document.documentElement.className =
-            classes.find((c) => c !== document.documentElement.className) ||
-            'light';
+            ['light', 'dark'].find(
+                (c) => c !== document.documentElement.className
+            ) || 'light';
+
         setNightMode((prev) => !prev);
     };
 

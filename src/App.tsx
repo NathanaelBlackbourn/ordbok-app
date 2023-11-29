@@ -1,6 +1,6 @@
 import styles from './App.module.scss';
 
-import { useEffect, useState } from 'react';
+import { useMemo, useState } from 'react';
 import fetchWords from './utils/fetchWords';
 
 import ButtonPanel from './components/ButtonPanel/ButonPanel';
@@ -19,9 +19,9 @@ function App() {
         setShowFavorites(false);
     };
 
-    useEffect(() => {
-        console.log(result);
-    }, [result]);
+    useMemo(() => {
+        document.documentElement.className = 'light';
+    }, []);
 
     return (
         <>
