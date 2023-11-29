@@ -60,11 +60,5 @@ describe('g krav', () => {
 
         // Assert that the audio play function is called
         expect(mocks.Audio.play).toHaveBeenCalled();
-
-        // expect (screen.getByTestId('audio-button').play).t;
-
-        // Assert that clicking the button does not throw any errors
-        // expect(await user.click(screen.getByTestId('audio-button'))).not
-        //     .toThrow;
     });
 });

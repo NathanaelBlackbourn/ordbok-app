@@ -10,6 +10,15 @@
         --primary-color: white;
         --background-color: black;
     }
+
+    --header-size: 4rem;
+    --row-spacing: calc(0.075 * var(--header-size)) 0;
+    --line-height: 1.2;
+
+    @media (min-width: 1400px) {
+        --header-size: 6rem;
+        --row-spacing: calc(0.075 * var(--header-size)) 0;
+    }
 }
 
 * {
@@ -29,20 +38,6 @@ body {
     margin: 0 0 0 0;
 }
 
-#root {
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
-
-    padding: 0 0.5rem;
-
-    @media (min-width: 768px) {
-        flex-direction: row;
-
-        height: 100vh;
-    }
-}
-
 // Global resets
 
 button {
@@ -59,8 +54,10 @@ ul {
 // Global styles
 
 h2 {
+    display: inline-block;
     font-size: 2rem;
-    line-height: 6rem;
+    height: fit-content;
+    margin: 0 0 0 0;
 }
 
 h3 {

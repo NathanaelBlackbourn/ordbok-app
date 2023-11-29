@@ -24,12 +24,12 @@ function App() {
     }, []);
 
     return (
-        <>
-            <div className={styles.left}>
+        <div className={styles.container}>
+            <div className={styles.section}>
                 <Heading />
                 <SearchBar handleSearch={handleSearch} />
             </div>
-            <div className={styles.right}>
+            <div className={styles.section}>
                 {showFavorites ? (
                     <Favorites handleSearch={handleSearch} />
                 ) : (
@@ -37,7 +37,7 @@ function App() {
                 )}
             </div>
             <ButtonPanel setShowFavorites={setShowFavorites} />
-        </>
+        </div>
     );
 }
 

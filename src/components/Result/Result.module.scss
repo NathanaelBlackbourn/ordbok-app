@@ -1,21 +1,17 @@
-.header {
+.headerRow {
     display: flex;
     gap: 0.5rem;
+    align-items: end;
+    height: var(--header-size);
+    margin: var(--row-spacing);
 }
 
 .word {
     font-size: 2rem;
-    line-height: 6rem;
-}
-
-.pronunciation {
-    display: flex;
-    gap: 0.5rem;
 }
 
 .phonetic {
     font-size: 1.5rem;
-    line-height: 4rem;
     margin: 0 0 0 0;
 }
 

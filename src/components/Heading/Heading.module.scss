@@ -1,4 +1,5 @@
 .heading {
-    font-size: clamp(4rem, 10rem, 6rem);
     margin: 0 0 2rem 0;
+    font-size: var(--header-size);
+    line-height: var(--line-height);
 }

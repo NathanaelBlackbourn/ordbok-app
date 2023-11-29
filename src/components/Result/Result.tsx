@@ -28,15 +28,17 @@ const Results = ({ result }: Props) => {
 
     return (
         <div data-testid="result">
-            <div className={styles.header}>
+            <div className={styles.headerRow}>
                 <h2 className={styles.word}>{result.word}</h2>
                 <AddFavorite word={result.word} />
             </div>
-            <div className={styles.pronunciation}>
+            <div className={styles.headerRow}>
                 {phonetic && <h3 className={styles.phonetic}>{phonetic}</h3>}
                 {!!audio && <AudioButton audio={audio} />}
             </div>
-            <h3>Definitions</h3>
+            <div className={styles.headerRow}>
+                <h3>Definitions</h3>
+            </div>
             <ul className={styles.meaningList}>
                 {result?.meanings &&
                     result.meanings.map((meaning, i) => (
