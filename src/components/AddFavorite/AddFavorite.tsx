@@ -21,7 +21,6 @@ const AddFavorite = ({ word }: Props) => {
     }, [word]);
 
     const handleClick = () => {
-        console.log('Button click');
         inFavorites ? removeFromFavorites() : addToFavorites();
     };
 

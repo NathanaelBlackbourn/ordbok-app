@@ -1,4 +1,4 @@
-import { render, screen, waitFor, within } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import { userEvent } from '@testing-library/user-event';
 import App from 'src/App';
 
@@ -8,23 +8,18 @@ describe('vg krav', () => {
         const user = userEvent.setup();
 
         // Add word 'test'
-        user.type(screen.getByRole('textbox'), 'test');
-        await waitFor(async () =>
-            expect(
-                await screen.findByTestId('add-favorite')
-            ).toBeInTheDocument()
-        );
-
-        user.click(await screen.findByTestId('add-favorite'));
+        await user.type(screen.getByRole('textbox'), 'test');
+        expect(await screen.findByTestId('add-favorite')).toBeInTheDocument();
+        await user.click(screen.getByTestId('add-favorite'));
 
         // Check that the favorites tab contains the word 'test'
-        user.click(screen.getByTestId('open-favorites'));
+        await user.click(screen.getByTestId('open-favorites'));
         expect(
             within(await screen.findByTestId('favorites')).getByText('test')
         ).toBeInTheDocument();
     });
 
-    it.skip('should be possible to toggle between light and dark mode', async () => {
+    it('should be possible to toggle between light and dark mode', async () => {
         render(<App />);
         const user = userEvent.setup();
 
@@ -48,9 +43,9 @@ describe('vg krav', () => {
         };
 
         // Test button twice
-        user.click(screen.getByTestId('mode-button'));
+        await user.click(screen.getByTestId('mode-button'));
         checkColors(primaryColor, backgroundColor);
-        user.click(screen.getByTestId('mode-button'));
+        await user.click(screen.getByTestId('mode-button'));
         checkColors(backgroundColor, primaryColor);
     });
 });
