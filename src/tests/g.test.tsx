@@ -4,6 +4,7 @@ import { userEvent } from '@testing-library/user-event';
 import App from 'src/App';
 import { iPhonetic } from 'src/types/response';
 import fetchWords from 'src/utils/fetchWords';
+import { mocks } from './utils';
 
 describe('g krav', () => {
     it('should display filtered results when searching a word', async () => {
@@ -48,17 +49,22 @@ describe('g krav', () => {
         if (!hasAudio)
             throw new Error('No audio was found for the word "test".');
 
-        // TODO: Somehow test that the sound is being played
-        // Potentially just if the play method is being called
-
         // Search 'test'
         await user.type(screen.getByRole('textbox'), 'test');
 
         // Assert that button renders
-        expect(await screen.findByTestId('audio-button')).toBeInTheDocument();
+        const audioButton = await screen.findByTestId('audio-button');
+        expect(audioButton).toBeInTheDocument();
+
+        await user.click(audioButton);
+
+        // Assert that the audio play function is called
+        expect(mocks.Audio.play).toHaveBeenCalled();
+
+        // expect (screen.getByTestId('audio-button').play).t;
 
         // Assert that clicking the button does not throw any errors
-        expect(await user.click(screen.getByTestId('audio-button'))).not
-            .toThrow;
+        // expect(await user.click(screen.getByTestId('audio-button'))).not
+        //     .toThrow;
     });
 });

@@ -24,8 +24,8 @@
         "baseUrl": ".",
         "paths": {
             "~/*": ["./src/"]
-        }
-        // "types": ["node"]
+        },
+        "types": ["jest"]
     },
     "include": ["src"],
     "references": [{ "path": "./tsconfig.node.json" }]
