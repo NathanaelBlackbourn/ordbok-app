@@ -20,8 +20,8 @@ const Favorites = ({ handleSearch }: Props) => {
             <h2>Favorites</h2>
             <ul data-testid="favorites" className={styles.ul}>
                 {data?.length ? (
-                    data.map((item) => (
-                        <li className={styles.li}>
+                    data.map((item, i) => (
+                        <li className={styles.li} key={i}>
                             <button
                                 className={styles.button}
                                 onClick={() => handleSearch(item)}

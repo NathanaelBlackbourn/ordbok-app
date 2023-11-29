@@ -10,6 +10,7 @@ interface Props {
 
 const AddFavorite = ({ word }: Props) => {
     const [inFavorites, setInFavorites] = useState(false);
+    const [ready, setReady] = useState(false);
 
     const session = useRef(
         JSON.parse(sessionStorage.getItem('favorites') || '[]')
@@ -21,6 +22,7 @@ const AddFavorite = ({ word }: Props) => {
     }, [word]);
 
     const handleClick = () => {
+        console.log('Button click');
         inFavorites ? removeFromFavorites() : addToFavorites();
     };
 
@@ -37,8 +39,17 @@ const AddFavorite = ({ word }: Props) => {
         setInFavorites(true);
     };
 
+    useEffect(() => {
+        setReady(true);
+        console.log('Button rendered');
+    }, []);
+
     return (
-        <button onClick={handleClick} data-testid="add-favorite">
+        <button
+            onClick={handleClick}
+            data-testid="add-favorite"
+            disabled={!ready}
+        >
             <Star
                 size={32}
                 weight={inFavorites ? 'fill' : 'light'}

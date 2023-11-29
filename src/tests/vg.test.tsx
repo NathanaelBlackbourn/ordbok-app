@@ -1,14 +1,19 @@
-import { render, screen, within } from '@testing-library/react';
+import { render, screen, waitFor, within } from '@testing-library/react';
 import { userEvent } from '@testing-library/user-event';
 import App from 'src/App';
 
-describe.only('vg krav', () => {
-    render(<App />);
-    const user = userEvent.setup();
+describe('vg krav', () => {
+    it('should be possible to save favorite words to session storage', async () => {
+        render(<App />);
+        const user = userEvent.setup();
 
-    it.skip('should be possible to save favorite words to session storage', async () => {
         user.type(screen.getByRole('textbox'), 'test');
+
+        await waitFor(async () =>
+            expect(await screen.findByTestId('add-favorite')).toBeEnabled()
+        );
         user.click(await screen.findByTestId('add-favorite'));
+
         user.click(screen.getByTestId('open-favorites'));
 
         expect(
@@ -16,7 +21,9 @@ describe.only('vg krav', () => {
         ).toBeInTheDocument();
     });
 
-    it.only('should be possible to toggle between light and dark mode', async () => {
+    it.skip('should be possible to toggle between light and dark mode', async () => {
+        render(<App />);
+        const user = userEvent.setup();
         const primaryColor = getComputedStyle(
             document.documentElement
         ).getPropertyValue('--primary-color');
