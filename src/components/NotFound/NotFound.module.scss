@@ -1,0 +1,8 @@
+@import '../../styles/mixins';
+
+.container {
+    @include line-height;
+
+    display: flex;
+    align-items: end;
+}
