@@ -35,7 +35,7 @@ const Meaning = ({ meaning }: Props) => {
                                 </p>
                                 {definition.example && (
                                     <p className={styles.example}>
-                                        {definition.example}
+                                        eg. "{definition.example}"
                                     </p>
                                 )}
                             </li>
