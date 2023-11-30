@@ -40,7 +40,8 @@ describe('search and result functions', () => {
         await user.type(screen.getByRole('textbox'), 'test');
 
         // Assert that button renders
-        const audioButton = await screen.findByTestId('audio-button');
+        // Icon alt text renders as title tag inside icons, hence findByTitle
+        const audioButton = await screen.findByTitle('Play audio');
         expect(audioButton).toBeInTheDocument();
 
         await user.click(audioButton);

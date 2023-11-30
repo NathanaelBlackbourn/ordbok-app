@@ -32,12 +32,14 @@ const ButtonPanel = ({ setShowFavorites }: Props) => {
                     size={32}
                     className={styles.sun}
                     style={{ bottom: nightMode ? '100%' : '0%' }}
+                    alt="Change color mode"
                 />
                 <Moon
                     weight="light"
                     size={32}
                     className={styles.moon}
                     style={{ top: nightMode ? '0%' : '100%' }}
+                    alt="Change color mode"
                 />
             </button>
             <Star
@@ -46,6 +48,7 @@ const ButtonPanel = ({ setShowFavorites }: Props) => {
                 className={styles.star}
                 onClick={() => setShowFavorites((prev) => !prev)}
                 data-testid="open-favorites"
+                alt="Open favorites"
             />
         </div>
     );

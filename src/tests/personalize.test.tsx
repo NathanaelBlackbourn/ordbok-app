@@ -9,11 +9,12 @@ describe('personalization of the site', () => {
 
         // Add word 'test'
         await user.type(screen.getByRole('textbox'), 'test');
-        expect(await screen.findByTestId('add-favorite')).toBeInTheDocument();
-        await user.click(screen.getByTestId('add-favorite'));
+        const addFav = await screen.findByTitle('Add to favorites');
+        expect(addFav).toBeInTheDocument();
+        await user.click(addFav);
 
         // Check that the favorites tab contains the word 'test'
-        await user.click(screen.getByTestId('open-favorites'));
+        await user.click(screen.getByTitle('Open favorites'));
         expect(
             within(await screen.findByTestId('favorites')).getByText('test')
         ).toBeInTheDocument();
@@ -43,9 +44,10 @@ describe('personalization of the site', () => {
         };
 
         // Test button twice
-        await user.click(screen.getByTestId('mode-button'));
         checkColors(primaryColor, backgroundColor);
         await user.click(screen.getByTestId('mode-button'));
         checkColors(backgroundColor, primaryColor);
+        await user.click(screen.getByTestId('mode-button'));
+        checkColors(primaryColor, backgroundColor);
     });
 });

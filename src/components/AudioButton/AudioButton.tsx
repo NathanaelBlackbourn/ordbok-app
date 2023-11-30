@@ -29,7 +29,11 @@ const AudioButton = ({ audio }: Props) => {
                 }}
                 data-testid="audio-button"
             >
-                {audioPlaying ? <Stop size={32} /> : <Play size={32} />}
+                {audioPlaying ? (
+                    <Stop size={32} />
+                ) : (
+                    <Play size={32} alt="Play audio" />
+                )}
             </button>
         </div>
     );

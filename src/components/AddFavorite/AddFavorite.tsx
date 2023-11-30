@@ -43,6 +43,7 @@ const AddFavorite = ({ word }: Props) => {
                 size={32}
                 weight={inFavorites ? 'fill' : 'light'}
                 className={styles.icon}
+                alt="Add to favorites"
             />
         </button>
     );
