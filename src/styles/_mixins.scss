@@ -13,3 +13,8 @@
         border-color: var(--primary-color);
     }
 }
+
+@mixin line-height {
+    height: var(--header-size);
+    padding: var(--row-spacing);
+}

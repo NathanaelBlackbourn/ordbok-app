@@ -1,9 +1,11 @@
+@import '../../styles/mixins.scss';
+
 .headerRow {
+    @include line-height;
+
     display: flex;
     gap: 0.5rem;
     align-items: end;
-    height: var(--header-size);
-    margin: var(--row-spacing);
 }
 
 .word {

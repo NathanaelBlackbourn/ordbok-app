@@ -2,11 +2,9 @@ import '@testing-library/jest-dom';
 import { render, screen, within } from '@testing-library/react';
 import { userEvent } from '@testing-library/user-event';
 import App from 'src/App';
-import { iPhonetic } from 'src/types/response';
-import fetchWords from 'src/utils/fetchWords';
 import { mocks } from './utils';
 
-describe('g krav', () => {
+describe('search and result functions', () => {
     it('should display filtered results when searching a word', async () => {
         render(<App />);
         const user = userEvent.setup();
@@ -30,24 +28,13 @@ describe('g krav', () => {
 
         // Check that the prompt appears to enter a word
         expect(
-            screen.getByText('Please enter a word to search.')
+            screen.getByText('Please enter a word to search')
         ).toBeInTheDocument();
     });
 
     it('should be possible to play sound files when available', async () => {
         render(<App />);
         const user = userEvent.setup();
-
-        // Check that the test word has an audio file
-        const hasAudio = await fetchWords('test').then(
-            (data) =>
-                data[0].phonetics.find((phonetic: iPhonetic) => phonetic.audio)
-                    .audio
-        );
-
-        // Throw error if no audio found
-        if (!hasAudio)
-            throw new Error('No audio was found for the word "test".');
 
         // Search 'test'
         await user.type(screen.getByRole('textbox'), 'test');

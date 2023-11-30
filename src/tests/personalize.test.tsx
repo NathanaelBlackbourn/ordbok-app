@@ -2,7 +2,7 @@ import { render, screen, within } from '@testing-library/react';
 import { userEvent } from '@testing-library/user-event';
 import App from 'src/App';
 
-describe('vg krav', () => {
+describe('personalization of the site', () => {
     it('should be possible to save favorite words to session storage', async () => {
         render(<App />);
         const user = userEvent.setup();

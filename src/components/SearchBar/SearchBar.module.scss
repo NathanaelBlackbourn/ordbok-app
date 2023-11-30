@@ -1,3 +1,11 @@
+@import '../../styles/mixins.scss';
+
+.container {
+    @include line-height;
+    display: flex;
+    flex-direction: column;
+}
+
 .searchBar {
     width: 80%;
 
@@ -17,4 +25,9 @@
     &::placeholder {
         color: var(--primary-color);
     }
+}
+
+.error {
+    font-size: 0.7rem;
+    padding-left: 0.5rem;
 }
