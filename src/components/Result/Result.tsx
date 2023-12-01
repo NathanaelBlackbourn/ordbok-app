@@ -12,7 +12,7 @@ interface Props {
     result: iWordData;
 }
 
-const Results = ({ result }: Props) => {
+const Result = ({ result }: Props) => {
     const audio = useMemo(() => {
         const sample = result.phonetics.find((phonetic) => phonetic.audio);
         return new Audio(sample?.audio) || null;
@@ -49,4 +49,4 @@ const Results = ({ result }: Props) => {
     );
 };
 
-export default Results;
+export default Result;
