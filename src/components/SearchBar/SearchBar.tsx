@@ -16,15 +16,15 @@ const SearchBar = ({ handleSearch }: Props) => {
 
     return (
         <div className={styles.container}>
+            <p className={styles.error}>
+                {error && 'Please enter a word to search'}
+            </p>
             <input
                 type="text"
                 placeholder="Enter word here"
                 className={styles.searchBar}
                 onChange={handleChange}
             />
-            <p className={styles.error}>
-                {error && 'Please enter a word to search'}
-            </p>
         </div>
     );
 };

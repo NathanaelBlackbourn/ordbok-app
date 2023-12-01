@@ -88,6 +88,16 @@ describe('search and result functions', () => {
         ).toBeInTheDocument();
     });
 
+    it('should display the message "Word not found" when the search term is not found', async () => {
+        render(<App />);
+        const user = userEvent.setup();
+
+        // Search a non-existent word
+        await user.type(screen.getByRole('textbox'), 'xwisk');
+
+        expect(await screen.findByText('Word not found')).toBeInTheDocument();
+    });
+
     it('should be possible to play sound files when available', async () => {
         render(<App />);
         const user = userEvent.setup();
