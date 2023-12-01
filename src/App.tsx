@@ -24,10 +24,6 @@ function App() {
     };
 
     useMemo(() => {
-        document.documentElement.className = 'light';
-    }, []);
-
-    useMemo(() => {
         result && setNotFound(false);
     }, [result]);
 
@@ -38,11 +34,6 @@ function App() {
                 <SearchBar handleSearch={handleSearch} />
             </div>
             <div className={styles.section}>
-                {/* {showFavorites ? (
-                    <Favorites handleSearch={handleSearch} />
-                ) : (
-                    (result && <Result result={result} />)
-                )} */}
                 {showFavorites ? (
                     <Favorites handleSearch={handleSearch} />
                 ) : notFound ? (

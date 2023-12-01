@@ -1,6 +1,6 @@
 import styles from './ButtonPanel.module.scss';
 
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import { Moon, Star, Sun } from '@phosphor-icons/react';
 
@@ -11,11 +11,14 @@ interface Props {
 const ButtonPanel = ({ setShowFavorites }: Props) => {
     const [nightMode, setNightMode] = useState(false);
 
+    useMemo(() => {
+        document.body.className = 'light';
+    }, []);
+
     const changeMode = () => {
-        document.documentElement.className =
-            ['light', 'dark'].find(
-                (c) => c !== document.documentElement.className
-            ) || 'light';
+        document.body.className =
+            ['light', 'dark'].find((c) => c !== document.body.className) ||
+            'light';
 
         setNightMode((prev) => !prev);
     };

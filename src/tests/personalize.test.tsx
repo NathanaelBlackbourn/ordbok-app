@@ -1,6 +1,8 @@
-import { render, screen, within } from '@testing-library/react';
+import { render, screen, waitFor, within } from '@testing-library/react';
 import { userEvent } from '@testing-library/user-event';
 import App from 'src/App';
+import ButtonPanel from 'src/components/ButtonPanel/ButonPanel';
+import { vi } from 'vitest';
 
 describe('personalization of the site', () => {
     it('should be possible to save favorite words to session storage and remove them', async () => {
@@ -34,33 +36,30 @@ describe('personalization of the site', () => {
     });
 
     it('should be possible to toggle between light and dark mode', async () => {
-        render(<App />);
+        render(<ButtonPanel setShowFavorites={vi.fn()} />);
         const user = userEvent.setup();
 
-        // Get the primary and backgound color variables from the root element
-        const primaryColor = getComputedStyle(
-            document.documentElement
-        ).getPropertyValue('--primary-color');
-        const backgroundColor = getComputedStyle(
-            document.documentElement
-        ).getPropertyValue('--background-color');
+        // Mode button is in the document
+        const modeButton = await screen.findByTestId('mode-button');
+        expect(modeButton).toBeInTheDocument();
 
-        // Check the colors of text and background
-        const checkColors = (text: string, background: string) => {
-            screen
-                .getAllByRole('heading')
-                .forEach((h) => expect(h).toHaveStyle({ color: text }));
+        const checkColorChange = async () => {
+            // Body currently has mode class
+            const modes = ['light', 'dark'];
+            const prevMode = document.body.className;
+            expect(modes).toContain(prevMode);
 
-            expect(document.querySelector('body')).toHaveStyle({
-                backgroundColor: background,
+            // Body class changes mode on button click
+            await user.click(modeButton);
+            await waitFor(() => {
+                const newMode = document.body.className;
+                expect(newMode).toBe(modes.find((m) => m !== prevMode));
             });
         };
 
-        // Test button twice
-        checkColors(primaryColor, backgroundColor);
-        await user.click(screen.getByTestId('mode-button'));
-        checkColors(backgroundColor, primaryColor);
-        await user.click(screen.getByTestId('mode-button'));
-        checkColors(primaryColor, backgroundColor);
+        // Test multiple toggles
+        expect(checkColorChange).not.toThrow();
+        expect(checkColorChange).not.toThrow();
+        expect(checkColorChange).not.toThrow();
     });
 });

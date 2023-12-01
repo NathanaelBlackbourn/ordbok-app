@@ -1,6 +1,15 @@
-// Root setup
+* {
+    font-weight: 300;
+    font-size: 25px;
+    font-family: Helvetica, sans-serif;
+    color: var(--primary-color);
 
-:root {
+    transition-property: color, background-color;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in;
+}
+
+body {
     &.light {
         --primary-color: black;
         --background-color: white;
@@ -19,20 +28,7 @@
         --header-size: 6rem;
         --row-spacing: calc(0.075 * var(--header-size)) 0;
     }
-}
 
-* {
-    font-weight: 300;
-    font-size: 25px;
-    font-family: Helvetica, sans-serif;
-    color: var(--primary-color);
-
-    transition-property: color, background-color;
-    transition-duration: 0.3s;
-    transition-timing-function: ease-in;
-}
-
-body {
     background-color: var(--background-color);
 
     margin: 0 0 0 0;
