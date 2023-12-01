@@ -23,6 +23,7 @@ const Meaning = ({ meaning }: Props) => {
                     size={32}
                     style={open ? { transform: 'rotate(45deg)' } : {}}
                     className={styles.icon}
+                    weight={'light'}
                 />
             </button>
             {open && (

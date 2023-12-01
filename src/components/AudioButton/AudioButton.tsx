@@ -13,26 +13,39 @@ const AudioButton = ({ audio }: Props) => {
     useEffect(() => {
         if (!audio) return;
         const handleEnded = () => setAudioPlaying(false);
+        audio.addEventListener('pause', handleEnded);
         audio.addEventListener('ended', handleEnded);
         return () => {
+            audio.removeEventListener('pause', handleEnded);
             audio.removeEventListener('ended', handleEnded);
         };
     }, [audio]);
+
+    useEffect(() => {
+        console.log('audioPlaying', audioPlaying);
+    }, [audioPlaying]);
 
     return (
         <div className={styles.audioContainer}>
             <button
                 className={styles.audioButton}
                 onClick={() => {
-                    audio.play();
+                    audioPlaying
+                        ? (audio.pause(), (audio.currentTime = 0))
+                        : audio.play();
                     setAudioPlaying(true);
                 }}
                 data-testid="audio-button"
             >
                 {audioPlaying ? (
-                    <Stop size={32} />
+                    <Stop size={32} weight={'light'} className={styles.icon} />
                 ) : (
-                    <Play size={32} alt="Play audio" />
+                    <Play
+                        size={32}
+                        alt="Play audio"
+                        weight={'light'}
+                        className={styles.icon}
+                    />
                 )}
             </button>
         </div>

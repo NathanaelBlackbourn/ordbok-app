@@ -3,4 +3,6 @@
 .icon {
     @include icon-border;
     @include icon-hover;
+
+    margin-bottom: -0.25rem;
 }
