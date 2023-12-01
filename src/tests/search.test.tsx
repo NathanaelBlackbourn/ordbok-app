@@ -17,6 +17,8 @@ describe('search and result functions', () => {
         expect(
             within(await screen.findByTestId('result')).getByText('test')
         ).toBeInTheDocument();
+
+        expect(await screen.findByText('Definitions')).toBeInTheDocument();
     });
 
     it('should render all data under dropdowns in search result', async () => {
