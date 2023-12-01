@@ -6,7 +6,7 @@ describe('initial load and render', () => {
     it('should display the header on load', async () => {
         render(<App />);
 
-        // Check that title is visible on page
+        // Title is visible on page
         expect(
             await screen.findByText('Search the Dictionary')
         ).toBeInTheDocument();
@@ -16,11 +16,22 @@ describe('initial load and render', () => {
         render(<App />);
         const user = userEvent.setup();
 
-        // Check that the search bar is visible on page
+        // The search bar is visible on page
         expect(await screen.findByRole('textbox')).toBeInTheDocument();
 
-        // Check that the user can type in the search bar
+        // The user can type in the search bar
         await user.type(screen.getByRole('textbox'), 'test');
         expect(screen.getByRole('textbox')).toHaveValue('test');
+    });
+
+    it('should render the favorites tab', async () => {
+        render(<App />);
+        const user = userEvent.setup();
+
+        // Open the favorites tab
+        await user.click(screen.getByTitle('Open favorites'));
+
+        // The title is in the document
+        expect(await screen.findByText('Favorites')).toBeInTheDocument();
     });
 });
