@@ -3,7 +3,7 @@ import { userEvent } from '@testing-library/user-event';
 import App from 'src/App';
 
 describe('personalization of the site', () => {
-    it('should be possible to save favorite words to session storage', async () => {
+    it('should be possible to save favorite words to session storage and remove them', async () => {
         render(<App />);
         const user = userEvent.setup();
 
@@ -18,6 +18,19 @@ describe('personalization of the site', () => {
         expect(
             within(await screen.findByTestId('favorites')).getByText('test')
         ).toBeInTheDocument();
+
+        // Remove word 'test'
+        await user.click(screen.getByText('test'));
+        expect(
+            within(await screen.findByTestId('result')).getByText('test')
+        ).toBeInTheDocument();
+        await user.click(await screen.findByTitle('Add to favorites'));
+
+        // Check that the favorites tab does not contain the word 'test'
+        await user.click(screen.getByTitle('Open favorites'));
+        expect(
+            within(await screen.findByTestId('favorites')).queryByText('test')
+        ).not.toBeInTheDocument();
     });
 
     it('should be possible to toggle between light and dark mode', async () => {
