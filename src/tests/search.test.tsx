@@ -2,6 +2,7 @@ import '@testing-library/jest-dom';
 import { render, screen, within } from '@testing-library/react';
 import { userEvent } from '@testing-library/user-event';
 import App from 'src/App';
+import data from 'src/mocks/data';
 import { mocks } from './utils';
 
 describe('search and result functions', () => {
@@ -16,6 +17,59 @@ describe('search and result functions', () => {
         expect(
             within(await screen.findByTestId('result')).getByText('test')
         ).toBeInTheDocument();
+    });
+
+    it('should render all data under dropdowns in search result', async () => {
+        render(<App />);
+        const user = userEvent.setup();
+
+        // Searcg
+        await user.type(await screen.findByRole('textbox'), 'test');
+
+        // Heading 'Definitions' renders
+        expect(await screen.findByText('Definitions')).toBeInTheDocument();
+
+        // All 'meanings' render
+        const meanings = await screen.findAllByTestId('meaning');
+        meanings.forEach((meaning, i) => {
+            expect(
+                within(meaning).getByText(data[0].meanings[i].partOfSpeech)
+            ).toBeInTheDocument();
+            expect(within);
+        });
+
+        // Dropdown reveals difinitions
+        const meaning = meanings[0];
+        await user.click(await within(meaning).findByRole('button'));
+        const testDefs = data[0].meanings[0].definitions.map(
+            (def) => def.definition
+        );
+        testDefs.forEach((def) =>
+            expect(within(meaning).getByText(def)).toBeInTheDocument()
+        );
+
+        // All examples are in the document
+        const examples = data[0].meanings[0].definitions.map(
+            (def) => def.example && def.example
+        );
+        examples.forEach((example) => {
+            if (example) {
+                expect(within(meaning).getByText(example)).toBeInTheDocument();
+            }
+        });
+
+        // All synonyms are rendered
+        // Check only that the word exists somewhere in the right container
+        // in order to allow for changes in design
+        const synonyms = data[0].meanings[0].synonyms;
+        synonyms.length &&
+            synonyms.forEach((syn) => expect(meaning).toContainHTML(syn));
+
+        // All antonyms are rendered
+        const antonyms = data[0].meanings[0].antonyms;
+        console.log(antonyms);
+        antonyms.length &&
+            antonyms.forEach((ant) => expect(meaning).toContainHTML(ant));
     });
 
     it('should should display an error message when the search bar is empty', async () => {

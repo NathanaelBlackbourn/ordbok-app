@@ -13,7 +13,7 @@ const Meaning = ({ meaning }: Props) => {
     const [open, setOpen] = useState(false);
 
     return (
-        <li className={styles.meaning}>
+        <li className={styles.meaning} data-testid="meaning">
             <button
                 className={styles.dropdown}
                 onClick={() => setOpen((prev) => !prev)}

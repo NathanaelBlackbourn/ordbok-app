@@ -6,6 +6,7 @@ describe('initial load and render', () => {
     it('should display the header on load', async () => {
         render(<App />);
 
+        // Check that title is visible on page
         expect(
             await screen.findByText('Search the Dictionary')
         ).toBeInTheDocument();
@@ -15,7 +16,10 @@ describe('initial load and render', () => {
         render(<App />);
         const user = userEvent.setup();
 
+        // Check that the search bar is visible on page
         expect(await screen.findByRole('textbox')).toBeInTheDocument();
+
+        // Check that the user can type in the search bar
         await user.type(screen.getByRole('textbox'), 'test');
         expect(screen.getByRole('textbox')).toHaveValue('test');
     });
