@@ -1,5 +1,6 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor, within } from '@testing-library/react';
 import { userEvent } from '@testing-library/user-event';
+import App from 'src/App';
 import ButtonPanel from 'src/components/ButtonPanel/ButonPanel';
 import Favorites from 'src/components/Favorites/Favorites';
 import Result from 'src/components/Result/Result';
@@ -8,38 +9,38 @@ import { vi } from 'vitest';
 
 describe('personalization of the site', () => {
     // The below test seems too long for an integration test
-    // It is erhaps closer to an end to end test
+    // It is perhaps closer to an end to end test
     // Underneath I have broken it down into smaller tests
 
-    // it('should be possible to save favorite words to session storage and remove them', async () => {
-    //     render(<App />);
-    //     const user = userEvent.setup();
+    it('should be possible to save favorite words to session storage and remove them', async () => {
+        render(<App />);
+        const user = userEvent.setup();
 
-    //     // Add word 'test'
-    //     await user.type(screen.getByRole('textbox'), 'test');
-    //     const addFav = await screen.findByTitle('Add to favorites');
-    //     expect(addFav).toBeInTheDocument();
-    //     await user.click(addFav);
+        // Add word 'test'
+        await user.type(screen.getByRole('textbox'), 'test');
+        const addFav = await screen.findByTitle('Add to favorites');
+        expect(addFav).toBeInTheDocument();
+        await user.click(addFav);
 
-    //     // Check that the favorites tab contains the word 'test'
-    //     await user.click(screen.getByTitle('Open favorites'));
-    //     expect(
-    //         within(await screen.findByTestId('favorites')).getByText('test')
-    //     ).toBeInTheDocument();
+        // Check that the favorites tab contains the word 'test'
+        await user.click(screen.getByTitle('Open favorites'));
+        expect(
+            within(await screen.findByTestId('favorites')).getByText('test')
+        ).toBeInTheDocument();
 
-    //     // Remove word 'test'
-    //     await user.click(screen.getByText('test'));
-    //     expect(
-    //         within(await screen.findByTestId('result')).getByText('test')
-    //     ).toBeInTheDocument();
-    //     await user.click(await screen.findByTitle('Add to favorites'));
+        // Remove word 'test'
+        await user.click(screen.getByText('test'));
+        expect(
+            within(await screen.findByTestId('result')).getByText('test')
+        ).toBeInTheDocument();
+        await user.click(await screen.findByTitle('Add to favorites'));
 
-    //     // Check that the favorites tab does not contain the word 'test'
-    //     await user.click(screen.getByTitle('Open favorites'));
-    //     expect(
-    //         within(await screen.findByTestId('favorites')).queryByText('test')
-    //     ).not.toBeInTheDocument();
-    // });
+        // Check that the favorites tab does not contain the word 'test'
+        await user.click(screen.getByTitle('Open favorites'));
+        expect(
+            within(await screen.findByTestId('favorites')).queryByText('test')
+        ).not.toBeInTheDocument();
+    });
 
     it('should be possible to add words to and remove from favourites in local storage', async () => {
         render(<Result result={data[0]} />);
